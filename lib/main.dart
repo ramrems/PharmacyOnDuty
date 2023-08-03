@@ -160,7 +160,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final theme = Theme.of(context).copyWith(dividerColor: Colors.transparent);
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 16,
         shadowColor: color_red,
