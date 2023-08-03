@@ -11,51 +11,15 @@ import 'model_iller_jason.dart';
 
 void main() {
   runApp(MyApp());
-  //callPharmacy("","");
 }
-/*
-const color_card= Color(0xFFFFF8EA);
-const color_body=Color(0xFFDCD7C9);
-const color_appBar=Color(0xFFA27B5C);
-const color_yazi=Color(0xFFA27B5C);
-const color_buton2=Color(0xFFC8B6A6);
-const color_buton1=Color(0xFFFFFFF8EA);
-*/
-
-
-const color_card= Color(0xFFFFFFF8EA);
-const color_body=Color(0xFFDCD7C9);
-const color_appBar=Color(0xFF815B5B);
-const color_yazi=Color(0xFF9E7676);
-//const color_buton2=Color(0xFFC8B6A6);
-const color_buttons=Color(0xFFFFFFF8EA);
-const color_icons=Color(0xFF815B5B);
-const color_kahve=Color(0xFFC8B6A6);
 
 const color_red=Color(0xFFA91B1C);
-const color_red1=Color(0xFF850000);//çok koyu
-const color_red1_2=Color(0xFFDC0000);
-const color_red2=Color(0xFFB31312);
-const color_red3=Color(0xFF630A10);//çok koyu
-const color_red4=Color(0xFF810000);//çok koyu ,icon
-const color_red5=Color(0xFF91091E);
-const color_red6=Color(0xFFA20A0A);
-const color_red7=Color(0xFF900D0D);
+const color_red2=Color(0xFF630A10);//çok koyu
+const color_red3=Color(0xFF810000);//çok koyu ,icon
+const color_red4=Color(0xFFA20A0A);
 
+const color_beyaz_ton=Color(0xFFFDF1D6);
 
-
-const color_beyaz1=Color(0xFFFFF6C3); //çok sarı
-const color_beyaz2=Color(0xFFF5EEDC);
-const color_beyaz3=Color(0xFFEEE2DE);//pembe tonlu
-const color_beyaz4=Color(0xFFFCF0C8); //sarımsı yine
-const color_beyaz5=Color(0xFFEEEBDD); //beğendim
-const color_beyaz6=Color(0xFFFDF1D6);
-const color_beyaz7=Color(0xFFF6EEC9);//sarımsı
-const color_beyaz8=Color(0xFFFFDBC5); //aşırı pembe olmaz
-
-
-const titleStyle = TextStyle(fontSize: 20);
-const subTitleStyle = TextStyle(fontSize: 18);
 String? plaka;
 List<DatumClass> eczaneListesi=[];
 
@@ -108,15 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Future callPharmacy(String il,String ilce) async {
     final headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer vyNGTryRdRTlMDBEeTdwO5v9PYAj9kORO2yaDQViWGraQRv3M9A9yP63ZJ90',
+      'Authorization': 'Bearer Api_Token',
     };
-    /*Map<String, dynamic> requestPayload = {
-      'ilce': '$ilce',
-      'il': '$il',
-    };*/
-
-    final params = {
-      //toLowerCase().replaceAll("ş", "s").replaceAll("ü", "u").replaceAll("ğ", "g").replaceAll("ö", "o")
+     final params = {
       'city': '$il'.toLowerCase().replaceAll("ü", "u").replaceAll("ş", "s").replaceAll("ç", "c").replaceAll("ğ", "g"),
       'county': '$ilce'.toLowerCase().replaceAll("ç", "c").replaceAll("ü", "u").replaceAll("ğ", "g").replaceAll("ö", "o"),
     };
@@ -133,36 +91,18 @@ class _MyHomePageState extends State<MyHomePage> {
         if (mounted) {
           setState(() {
             pharmacyResult.add(result_p);
-            print("pharmacyResult[0]:${pharmacyResult[0]}");
-            //print(cityResult[5].district);
-
+            //For testing api
+            //print("pharmacyResult[0]:${pharmacyResult[0]}");
           });
         }
       }
     }
     else if (status != 200) throw Exception('http.get error: statusCode= $status');
 
-    print("body: ${res.body}");
-    var result = pharmacyFromJson(res.body);
-    //print("result:${result.data.elementAt(0)}");
-    //var a= result.data.first;
-    print(result.data);
-    if(result.data.length!=0) {
-      var a= result.data.elementAt(0);
-      var result2 = DatumClass.fromJson(a);
-      print(result2.eczaneAdi);
-      print("Type: ${pharmacyResult.runtimeType}");
-      //pharmacyResult =result;
-      print("cityy: $il");
-      print("county: $ilce");
-    }
   }
   Future<List<DatumClass>>eczaneGetir(List<DatumClass> eczaneListe) async{
-    // var eczaneListe = <DatumClass>[];
-    //
-    // eczaneListe.add(pharmacyResult as DatumClass);
-    return eczaneListe;
 
+    return eczaneListe;
   }
   Future callCity() async {
     try {
@@ -173,9 +113,8 @@ class _MyHomePageState extends State<MyHomePage> {
         if (mounted) {
           setState(() {
             cityResult = result;
-            print("cityResult[5].text: ${cityResult[5].text}");
-            //print(cityResult[5].district);
-
+            //For testing api
+            //print("cityResult[5].text: ${cityResult[5].text}");
           });
           }
         }
@@ -199,10 +138,10 @@ class _MyHomePageState extends State<MyHomePage> {
         if (mounted) {
           setState(() {
             districtResult=result_ilce;
-            print("city:${districtResult[5].city}");
-            print("district:${districtResult[5].district}");
+            //For testing api
+            // print("city:${districtResult[5].city}");
+            // print("district:${districtResult[5].district}");
           });
-          // print(ditrictResult.first.district);
         }
       }
       else {
@@ -225,18 +164,17 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         elevation: 16,
         shadowColor: color_red,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(100), ),
         side: BorderSide(
           width:3,
-          color: color_red6,
+          color: color_red4,
           style: BorderStyle.solid,
 
         ),),
         toolbarHeight: 150,
         centerTitle: true,
-        //leading: Icon(Icons.local_hospital_sharp),
         title: Row(
           children: [
             SizedBox(
@@ -255,11 +193,8 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
-
                 Text('Nöbetçi',style: GoogleFonts.roboto(textStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: ekranGenisligi/11.8)),),
                 Text('Eczane',style: GoogleFonts.roboto(textStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: ekranGenisligi/11)),),
-
               ],
             ),
 
@@ -280,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 DecoratedBox(
                   decoration: BoxDecoration(
                       color:Colors.white, //background color of dropdown button
-                      border: Border.all(color: color_red4, width:3), //border of dropdown button
+                      border: Border.all(color: color_red3, width:3), //border of dropdown button
                       borderRadius: BorderRadius.all(Radius.circular(10)), //border raiuds of dropdown button
                       boxShadow: const <BoxShadow>[ //apply shadow on Dropdown button
                       BoxShadow(
@@ -294,7 +229,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                         isExpanded: true,
-                        dropdownColor: Colors.white , //color_beyaz6,
+                        dropdownColor: Colors.white , //color_beyaz_ton,
                         hint: Padding(
                           padding: EdgeInsets.only(left: ekranGenisligi/30),
                           child: Text("İl seçiniz",style: TextStyle(fontWeight: FontWeight.bold,),
@@ -303,7 +238,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         value:dropdownValue_il == "" ? null : dropdownValue_il,
                         icon: Padding(
                           padding: EdgeInsets.only(right: ekranGenisligi/50),
-                          child: const Icon(Icons.arrow_drop_down,color: color_red4,),
+                          child: const Icon(Icons.arrow_drop_down,color: color_red3,),
                         ),
                         elevation: 16,
                         style: GoogleFonts.ubuntu(textStyle: TextStyle(color: Colors.black),),
@@ -317,9 +252,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             plaka=plaka_bul(value)!;
                             print("plaka: ${plaka}");
                             print("İstanbul".toLowerCase());
-                            //callCity();
                             callDistrict(plaka!);
-                            //_MyHomePageState();
                           });
                           },
                         items: cityResult.map<DropdownMenuItem<String>>((Sehir value) {
@@ -341,7 +274,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 DecoratedBox(
                   decoration: BoxDecoration(
                       color:Colors.white, //background color of dropdown button
-                      border: Border.all(color: color_red4, width:3), //border of dropdown button
+                      border: Border.all(color: color_red3, width:3), //border of dropdown button
                      // borderRadius: BorderRadius.only(topRight: Radius.elliptical(10, 10),bottomLeft: Radius.elliptical(10, 10)), //border raiuds of dropdown button
                       borderRadius:BorderRadius.all(Radius.circular(10)),
                       boxShadow: const <BoxShadow>[ //apply shadow on Dropdown button
@@ -364,7 +297,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         value:dropdownValue_ilce == "" ? null : dropdownValue_ilce,
                         icon: Padding(
                           padding: EdgeInsets.only(right:ekranGenisligi/50,),
-                          child: const Icon(Icons.arrow_drop_down,color: color_red4,),
+                          child: const Icon(Icons.arrow_drop_down,color: color_red3,),
                         ),
                         elevation: 16,
                         style: GoogleFonts.ubuntu(textStyle: TextStyle(color: Colors.black),),
@@ -408,7 +341,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               return Padding(
                                 padding: const EdgeInsets.all(6.0),
                                 child: Container(
-                                  decoration: new BoxDecoration(
+                                  decoration: BoxDecoration(
                                     boxShadow: [
                                       BoxShadow(
                                         color: color_red.withOpacity(.1),
@@ -427,8 +360,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                       fill: Fill.fillFront, // Fill the back side of the card to make in the same size as the front.
                                       direction: FlipDirection.VERTICAL, // default
                                       side: CardSide.FRONT,
-                                      //borderOnForeground: true,
-                                      //color:color_card,
                                       back: Container(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -451,7 +382,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           print("Can not launch this");
                                                         }
                                                         },
-                                                      child: Text(eczane.telefon,style:GoogleFonts.lora(textStyle:TextStyle(fontSize: ekranGenisligi/22,fontWeight:FontWeight.bold,color: color_red6),),)),),
+                                                      child: Text(eczane.telefon,style:GoogleFonts.lora(textStyle:TextStyle(fontSize: ekranGenisligi/22,fontWeight:FontWeight.bold,color: color_red4),),)),),
                                                 Padding(
                                                   padding: EdgeInsets.only(right: 8.0,top:8,bottom: 6),
                                                   child: GestureDetector(
@@ -460,7 +391,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           EczaneDetay(eczane:eczane)));
                                                               //MapUtils.openMap(eczane.address);
                                                     },
-                                                    child: AutoSizeText(eczane.adresi,style: GoogleFonts.robotoSlab(textStyle:TextStyle(decoration: TextDecoration.underline,fontSize: ekranGenisligi/26,color:color_red3,),),
+                                                    child: AutoSizeText(eczane.adresi,style: GoogleFonts.robotoSlab(textStyle:TextStyle(decoration: TextDecoration.underline,fontSize: ekranGenisligi/26,color:color_red2,),),
                                                       maxLines: 2, // Limit to a single line
                                                       minFontSize: 14, // Minimum font size
                                                       stepGranularity: 1, // Font size change granularity),
@@ -481,12 +412,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                               children: [
                                                 Padding(
                                                   padding: EdgeInsets.only(right: 8.0,left: 8.0,top: ekranYuksekligi/35),
-                                                  child: Text(eczane.eczaneAdi,style:GoogleFonts.lora(textStyle:TextStyle(fontSize: 22,fontWeight:FontWeight.bold,color: color_red6),),),
+                                                  child: Text(eczane.eczaneAdi,style:GoogleFonts.lora(textStyle:TextStyle(fontSize: 22,fontWeight:FontWeight.bold,color: color_red4),),),
                                                 ),
-                                                /*Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: Text(eczane.ilce,style: GoogleFonts.robotoSlab(textStyle:TextStyle(fontSize: 18,color: color_red3,),),),
-                                                ),*/
                                               ],
                                             ),
                                             leading: Padding(

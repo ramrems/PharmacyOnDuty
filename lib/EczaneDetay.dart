@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-//import 'package:location/location.dart';
 import 'package:flutter/services.dart';
 import 'package:nobetci_eczane/main.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,7 +10,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'googleMap.dart';
 import 'model_eczane_json.dart';
 
-//const MapUtils currentLocation= MapUtils(e);
 
 const color_appBar=Color(0xFF815B5B);
 const color_red6=Color(0xFFA20A0A);
@@ -19,37 +17,23 @@ const color_red6=Color(0xFFA20A0A);
 
 class EczaneDetay extends StatefulWidget {
 
-  //const EczaneDetay({super.key});
   DatumClass eczane;
 
   EczaneDetay({required this.eczane});
 
   @override
   State<EczaneDetay> createState() => _EczaneDetayState();
-
 }
 
 class _EczaneDetayState extends State<EczaneDetay> {
- /* Position? _currentPosition;
-  String? _currentAddress;*/
-  //final url_map = Uri.parse('https://maps.google.com/?q=${widget.adress}');
 
-/*Future<void> geoCode() async {
-  String query = "1600 Amphiteatre Parkway, Mountain View";
-  var addresses = await Geocoder.local.findAddressesFromQuery(query);
-  var first = addresses.first;
-  print("${first.featureName} : ${first.coordinates}");
-  //LatLng currentLocation=LatLng(${first.coordinates});
-}*/
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = Set<Marker>();
-
 
   CameraPosition fonk(double konum1,double konum2){
     LatLng currentLocation=LatLng(konum1, konum2);
 
     CameraPosition _initialCameraPosition= CameraPosition(
-
         target: currentLocation,
         zoom: 18,);
 
@@ -67,7 +51,6 @@ class _EczaneDetayState extends State<EczaneDetay> {
 
   void initState() {
     super.initState();
-
     _setMarker(LatLng(widget.eczane.latitude, widget.eczane.longitude));
   }
 
@@ -162,8 +145,6 @@ class _EczaneDetayState extends State<EczaneDetay> {
                     onMapCreated: (GoogleMapController controller){
                       _controller.complete(controller);
                     },
-                    //onMapCreated:(controller) => _googleMapController=controller,
-                    //child: Text("Eczane Detay",style: TextStyle(fontSize: 40,color: Colors.blue),),
                   ),
                 ),
               ),
@@ -171,12 +152,6 @@ class _EczaneDetayState extends State<EczaneDetay> {
           ],
         ),
       ),
-     /* floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        foregroundColor: Colors.black,
-        onPressed:()=> _googleMapController.animateCamera(CameraUpdate.newCameraPosition(_initialCameraPosition)),
-        child: Icon(Icons.center_focus_strong),
-      ),*/
     );
   }
 }
