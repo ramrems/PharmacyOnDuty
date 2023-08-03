@@ -43,8 +43,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-lib/deneme.dart
-lib/deneme2.dart
+deneme.dart
+deneme2.dart
 lib/EczaneDetayEski.dart
 lib/eski_kod.dart
 lib/model_pharmacy.dart
