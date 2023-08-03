@@ -14,8 +14,8 @@ void main() {
 }
 
 const color_red=Color(0xFFA91B1C);
-const color_red2=Color(0xFF630A10);//çok koyu
-const color_red3=Color(0xFF810000);//çok koyu ,icon
+const color_red2=Color(0xFF630A10);
+const color_red3=Color(0xFF810000);
 const color_red4=Color(0xFFA20A0A);
 
 const color_beyaz_ton=Color(0xFFFDF1D6);
